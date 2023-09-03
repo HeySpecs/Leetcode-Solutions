@@ -1,41 +1,22 @@
-1963. Minimum Number of Swaps to Make the String Balanced
+class Solution {
+    public int minSwaps(String s) {
+        int unbalancedClosing = 0; // Initialize a count of unbalanced closing brackets
+        int minSwaps = 0; // Initialize the minimum swaps needed to balance the string
 
-You are given a 0-indexed string s of even length n. The string consists of exactly n / 2 opening brackets '[' and n / 2 closing brackets ']'.
+        // Iterate through each character in the input string
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '[') {
+                unbalancedClosing++; // Increment unbalanced closing brackets count when an opening bracket is encountered
+            } else {
+                // If a closing bracket is encountered
+                if (unbalancedClosing > 0) {
+                    unbalancedClosing--; // Pair it with an opening bracket, reducing the unbalanced count
+                } else {
+                    minSwaps++; // If there's no opening bracket to pair with, increment the swaps count
+                }
+            }
+        }
 
-A string is called balanced if and only if:
-
-It is the empty string, or
-It can be written as AB, where both A and B are balanced strings, or
-It can be written as [C], where C is a balanced string.
-You may swap the brackets at any two indices any number of times.
-
-Return the minimum number of swaps to make s balanced.
-
-Example 1:
-
-Input: s = "][]["
-Output: 1
-Explanation: You can make the string balanced by swapping index 0 with index 3.
-The resulting string is "[[]]".
-Example 2:
-
-Input: s = "]]][[["
-Output: 2
-Explanation: You can do the following to make the string balanced:
-- Swap index 0 with index 4. s = "[]][][".
-- Swap index 1 with index 5. s = "[[][]]".
-The resulting string is "[[][]]".
-Example 3:
-
-Input: s = "[]"
-Output: 0
-Explanation: The string is already balanced.
- 
-
-Constraints:
-
-n == s.length
-2 <= n <= 106
-n is even.
-s[i] is either '[' or ']'.
-The number of opening brackets '[' equals n / 2, and the number of closing brackets ']' equals n / 2.
+        return minSwaps; // Return the minimum swaps needed to balance the string
+    }
+}
